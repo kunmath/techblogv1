@@ -5,9 +5,9 @@
   "main": ".eleventy.js",
   "scripts": {
     "build": "npm run build:css && npx @11ty/eleventy",
-    "build:css": "sass src/styles/den-inspired.scss:_site/css/den-inspired.css --style=compressed",
+    "build:css": "sass src/styles/main.scss:_site/css/main.css --style=compressed",
     "dev": "npm run build:css && npx @11ty/eleventy --serve --port=8080",
-    "dev:css": "sass src/styles/den-inspired.scss:_site/css/den-inspired.css --watch",
+    "dev:css": "sass src/styles/main.scss:_site/css/main.css --watch",
     "clean": "rm -rf _site",
     "test": "npm run test:accessibility && npm run test:performance && npm run test:content",
     "test:accessibility": "node tests/accessibility/test_wcag_compliance.js",
