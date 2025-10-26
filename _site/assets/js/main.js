@@ -385,8 +385,17 @@ class PerformanceMonitor {
   }
 }
 
+// Progressive Enhancement - Enable JavaScript features
+function enableJavaScriptFeatures() {
+  document.body.classList.add('js-enabled');
+}
+
 // Initialize all components when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
+  // Enable progressive enhancement
+  enableJavaScriptFeatures();
+  
+  // Initialize components
   new ReadingProgress();
   new TagFilter();
   new CodeCopy();

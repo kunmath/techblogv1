@@ -28,6 +28,9 @@ class ThemeManager {
         } else {
             this.setTheme(systemPreference, false);
         }
+        
+        // Listen for system preference changes
+        this.setupSystemPreferenceListener();
     }
 
     /**
@@ -101,6 +104,26 @@ class ThemeManager {
             return darkModeQuery.matches ? 'dark' : 'light';
         }
         return this.defaultTheme;
+    }
+
+    /**
+     * Set up listener for system preference changes
+     * Only updates theme if user hasn't set a manual preference
+     */
+    setupSystemPreferenceListener() {
+        if (typeof window !== 'undefined' && window.matchMedia) {
+            const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            // Listen for changes
+            darkModeQuery.addEventListener('change', (event) => {
+                // Only auto-update if no stored preference exists
+                const storedPreference = this.loadStoredPreference();
+                if (!storedPreference) {
+                    const newSystemTheme = event.matches ? 'dark' : 'light';
+                    this.setTheme(newSystemTheme, false); // Don't save automatic changes
+                }
+            });
+        }
     }
 
     /**
