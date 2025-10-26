@@ -1,0 +1,54 @@
+// Dark Theme Variables
+// Used when data-theme="dark"
+
+[data-theme="dark"] {
+  // Background colors
+  --color-background: #121212;
+  --color-background-secondary: #1e1e1e;
+  --color-background-tertiary: #2d2d2d;
+
+  // Text colors  
+  --color-text: #e0e0e0;
+  --color-text-secondary: #b0b0b0;
+  --color-text-muted: #808080;
+
+  // Border and divider colors
+  --color-border: #404040;
+  --color-border-light: #333333;
+
+  // Accent and interactive colors (teal)
+  --color-accent: #2dd4bf;
+  --color-accent-hover: #14b8a6;
+  --color-accent-light: #134e4a;
+
+  // Primary colors (teal-based)
+  --color-primary: #2dd4bf;
+  --color-primary-hover: #14b8a6;
+  --color-link: #2dd4bf;
+  --color-link-hover: #5eead4;
+
+  // Code and syntax highlighting
+  --color-code-background: #1e1e1e;
+  --color-code-text: #ff6b9d;
+  --color-code-border: #404040;
+
+  // Navigation and UI elements
+  --color-nav-background: #1e1e1e;
+  --color-nav-border: #404040;
+  --color-button-background: #2d2d2d;
+  --color-button-hover: #404040;
+  --color-button-text: #121212;
+
+  // Additional semantic colors
+  --color-text-body: #e0e0e0;
+  --color-surface-muted: #2d2d2d;
+  --color-shadow: rgba(45, 212, 191, 0.25);
+
+  // Transition
+  --transition-theme: all 0.2s ease;
+
+  // Status and feedback colors
+  --color-success: #51cf66;
+  --color-warning: #ffd43b;
+  --color-error: #ff6b6b;
+}

@@ -297,32 +297,54 @@ class SkipToContent {
   }
 }
 
-// Theme toggle (future enhancement)
-class ThemeToggle {
+// Theme Manager Integration
+class ThemeController {
   constructor() {
     this.toggleButton = document.querySelector('[data-theme-toggle]');
-    this.currentTheme = localStorage.getItem('theme') || 'light';
+    this.themeManager = null;
     
-    if (this.toggleButton) {
+    if (this.toggleButton && window.ThemeManager) {
       this.init();
     }
   }
   
   init() {
-    this.setTheme(this.currentTheme);
-    
-    this.toggleButton.addEventListener('click', () => {
-      this.currentTheme = this.currentTheme === 'light' ? 'dark' : 'light';
-      this.setTheme(this.currentTheme);
-      localStorage.setItem('theme', this.currentTheme);
+    // Initialize ThemeManager
+    this.themeManager = new window.ThemeManager({
+      storageKey: 'theme-preference',
+      defaultTheme: 'light'
     });
+    
+    // Set up toggle button event
+    this.toggleButton.addEventListener('click', () => {
+      this.themeManager.toggleTheme();
+    });
+    
+    // Listen for theme changes to update button
+    this.themeManager.addEventListener('themechange', (event) => {
+      this.updateToggleButton(event.detail.currentTheme);
+    });
+    
+    // Initial button state
+    this.updateToggleButton(this.themeManager.getCurrentTheme());
   }
   
-  setTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    this.toggleButton.textContent = theme === 'light' ? '🌙' : '☀️';
+  updateToggleButton(currentTheme) {
+    if (!this.toggleButton) return;
+    
+    const isDark = currentTheme === 'dark';
+    
+    // Update ARIA attributes
+    this.toggleButton.setAttribute('aria-pressed', isDark.toString());
     this.toggleButton.setAttribute('aria-label', 
-      `Switch to ${theme === 'light' ? 'dark' : 'light'} mode`);
+      isDark ? 'Switch to light mode' : 'Switch to dark mode'
+    );
+    
+    // Update text content
+    const textElement = this.toggleButton.querySelector('.theme-toggle-text');
+    if (textElement) {
+      textElement.textContent = isDark ? 'Light' : 'Dark';
+    }
   }
 }
 
@@ -370,7 +392,7 @@ document.addEventListener('DOMContentLoaded', () => {
   new CodeCopy();
   new LazyImages();
   new SkipToContent();
-  new ThemeToggle();
+  new ThemeController();
   new PerformanceMonitor();
 });
 
