@@ -14,6 +14,7 @@ yarn-error.log*
 
 # Environment variables
 .env*
+bun.lock
 
 # Cache directories
 .cache/
